@@ -10,8 +10,8 @@
   "apiKey": {
     "type": "entry",
     "default": "",
-    "description": "ExchangeRate-API Key",
-    "tooltip": "Enter your API Key from https://www.exchangerate-api.com"
+    "description": "OpenExchangeRates App ID",
+    "tooltip": "Enter your App ID from https://openexchangerates.org"
   },
   "head2": {
     "type": "header",
@@ -48,6 +48,22 @@
       "CAD": "CAD",
       "CHF": "CHF",
       "CNY": "CNY"
+    }
+  },
+  "headRefresh": {
+    "type": "header",
+    "description": "Refresh Settings"
+  },
+  "refreshInterval": {
+    "type": "combobox",
+    "default": 1440,
+    "description": "Refresh Interval",
+    "tooltip": "Select how often the exchange rate should be updated.",
+    "options": {
+      "1 hour": 60,
+      "6 hours": 360,
+      "12 hours": 720,
+      "24 hours": 1440
     }
   },
   "head3": {

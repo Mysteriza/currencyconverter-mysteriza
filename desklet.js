@@ -9,7 +9,7 @@ const Gio = imports.gi.Gio;
 
 const UUID = "currencyconverter@mysteriza";
 const DESKLET_ROOT = imports.ui.deskletManager.deskletMeta[UUID].path;
-const API_BASE_URL = "https://v6.exchangerate-api.com/v6";
+const API_BASE_URL = "https://openexchangerates.org/api";
 const DEFAULT_WIDTH = 200;
 const DEFAULT_HEIGHT = 120;
 const DEFAULT_PRICE_FONT_SIZE = 20;
@@ -19,7 +19,6 @@ const FONT_SIZE_CONTAINER = 14;
 const FONT_SIZE_HEADER = 16;
 const FONT_SIZE_SUBHEADER = 12;
 const FONT_SIZE_LAST_UPDATED = 10;
-const REFRESH_INTERVAL = 1440; // 24 hours in minutes
 
 let httpSession;
 if (Soup.MAJOR_VERSION === 2) {
@@ -65,6 +64,11 @@ CurrencyTicker.prototype = {
         "cfgTargetCurrency",
         this.onSettingsChanged
       );
+      this.settings.bind(
+        "refreshInterval",
+        "cfgRefreshInterval",
+        this.onSettingsChanged
+      );
       this.settings.bind("width", "cfgWidth", this.onUISettingsChanged);
       this.settings.bind("height", "cfgHeight", this.onUISettingsChanged);
       this.settings.bind("bgColor", "cfgBgColor", this.onUISettingsChanged);
@@ -100,6 +104,7 @@ CurrencyTicker.prototype = {
       this.cfgApiKey = this.cfgApiKey || "";
       this.cfgBaseCurrency = this.cfgBaseCurrency || "USD";
       this.cfgTargetCurrency = this.cfgTargetCurrency || "IDR";
+      this.cfgRefreshInterval = this.cfgRefreshInterval || 1440; // Default 24 hours in minutes
       this.cfgWidth = this.cfgWidth || DEFAULT_WIDTH;
       this.cfgHeight = this.cfgHeight || DEFAULT_HEIGHT;
       this.cfgBgColor = this.cfgBgColor || "#303030";
@@ -109,10 +114,20 @@ CurrencyTicker.prototype = {
       this.cfgPriceTextColor = this.cfgPriceTextColor || "#f9a7b5";
       this.cfgHeaderTextColor = this.cfgHeaderTextColor || "#73c4ff";
 
+      this.setupMenu();
       this.fetchData(true);
     } catch (e) {
       this.showError("Failed to initialize desklet");
     }
+  },
+
+  setupMenu: function () {
+    this._menu.addAction(
+      "Refresh",
+      Lang.bind(this, function () {
+        this.fetchData(true); // Fetch data immediately on manual refresh
+      })
+    );
   },
 
   on_desklet_removed: function () {
@@ -170,7 +185,7 @@ CurrencyTicker.prototype = {
     this.isFetching = true;
 
     if (!this.cfgApiKey) {
-      this.showError("API Key is not set");
+      this.showError("App ID is not set");
       this.isFetching = false;
       return;
     }
@@ -179,7 +194,7 @@ CurrencyTicker.prototype = {
       this.showLoading();
     }
 
-    const apiUrl = `${API_BASE_URL}/${this.cfgApiKey}/latest/${this.cfgBaseCurrency}`;
+    const apiUrl = `${API_BASE_URL}/latest.json?app_id=${this.cfgApiKey}`;
     const message = Soup.Message.new("GET", apiUrl);
 
     if (Soup.MAJOR_VERSION === 2) {
@@ -203,8 +218,9 @@ CurrencyTicker.prototype = {
     if (this.mainloop) {
       Mainloop.source_remove(this.mainloop);
     }
+    // Schedule the next fetch based on the user-selected interval
     this.mainloop = Mainloop.timeout_add_seconds(
-      REFRESH_INTERVAL * 60,
+      this.cfgRefreshInterval * 60,
       Lang.bind(this, this.fetchData)
     );
   },
@@ -239,15 +255,12 @@ CurrencyTicker.prototype = {
   processData: function (data, initUI) {
     try {
       const parsedData = JSON.parse(data);
-      if (
-        !parsedData.conversion_rates ||
-        !parsedData.conversion_rates[this.cfgTargetCurrency]
-      ) {
+      if (!parsedData.rates || !parsedData.rates[this.cfgTargetCurrency]) {
         this.showError(`Exchange rate for ${this.cfgTargetCurrency} not found`);
         return;
       }
-      const rate = parsedData.conversion_rates[this.cfgTargetCurrency];
-      const lastUpdated = parsedData.time_last_update_utc;
+      const rate = parsedData.rates[this.cfgTargetCurrency];
+      const lastUpdated = new Date(parsedData.timestamp * 1000);
       if (initUI) {
         this.setupUI(rate, lastUpdated);
       } else {
