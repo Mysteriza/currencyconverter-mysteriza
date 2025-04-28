@@ -2,6 +2,9 @@
 
 A lightweight Cinnamon desklet to display real-time exchange rates for various currencies with a customizable appearance. Built for simplicity and functionality, this desklet fetches the latest exchange rates daily using the ExchangeRate-API.
 
+![image](https://github.com/user-attachments/assets/cd9030e7-4096-4e93-afc1-245d88a0b9d1)
+
+
 ## Features
 - **Multi-Currency Support**: Choose your base and target currencies (e.g., USD to IDR, EUR to JPY) from a list of popular options.
 - **Real-Time Updates**: Automatically refreshes exchange rates every 24 hours.
