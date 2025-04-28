@@ -1,13 +1,13 @@
 # Currency Converter Desklet
 
-A lightweight Cinnamon desklet to display real-time exchange rates for various currencies with a customizable appearance. Built for simplicity and functionality, this desklet fetches the latest exchange rates daily using the ExchangeRate-API.
+A lightweight Cinnamon desklet to display real-time exchange rates for various currencies with a customizable appearance. Built for simplicity and functionality, this desklet fetches the latest exchange rates daily using the OpenExchangeRates.
 
 ![image](https://github.com/user-attachments/assets/cd9030e7-4096-4e93-afc1-245d88a0b9d1)
 
 
 ## Features
 - **Multi-Currency Support**: Choose your base and target currencies (e.g., USD to IDR, EUR to JPY) from a list of popular options.
-- **Real-Time Updates**: Automatically refreshes exchange rates every 24 hours.
+- **Real-Time Updates**: Automatically refreshes exchange rates based on user-selected intervals (1 hour, 6 hours, 12 hours, or 24 hours).
 - **Customizable Appearance**:
   - Adjust desklet width, height, and price font size.
   - Set background color, transparency, and border radius.
@@ -31,11 +31,11 @@ A lightweight Cinnamon desklet to display real-time exchange rates for various c
    - Find "Currency Converter" in the list and click the "+" button to add it to your desktop.
 4. **Configure the Desklet**:
    - Right-click the desklet and select Configure.
-   - Enter your ExchangeRate-API key (get one for free at https://www.exchangerate-api.com).
+   - Enter your OpenExchangeRates App ID (get one for free at https://openexchangerates.org).
    - Select your base and target currencies (e.g., USD to IDR).
    - Customize the appearance (size, colors, transparency) as desired.
 5. **Requirements**:
    - Cinnamon desktop environment (tested on Cinnamon 5.x).
    - Internet connection for fetching exchange rates.
-   - An API key from ExchangeRate-API.
+   - An API key from OpenExchangeRates.
    - libsoup library for HTTP requests.
