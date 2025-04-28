@@ -1,0 +1,55 @@
+.container {
+  padding: 10px 5px 10px 5px;
+  font-family: Ubuntu, sans-serif, serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.row {
+  margin: 2px auto;
+}
+
+.header-row {
+  align-items: center;
+}
+
+.price-row {
+  align-items: center;
+}
+
+.loading {
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+.error {
+  font-size: 14px;
+  padding-bottom: 10px;
+  color: #ff4b48;
+}
+
+.header {
+  text-align: left;
+}
+
+.subheader {
+  text-align: left;
+}
+
+.containerLeft {
+  padding-right: 5px;
+}
+
+.containerRight {
+  text-align: left;
+}
+
+.containerPrice {
+  text-align: center;
+  margin: 2px auto 5px auto;
+}
+
+.lastUpdated {
+  text-align: right;
+  margin: 5px 0;
+}

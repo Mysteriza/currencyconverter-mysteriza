@@ -1,0 +1,10 @@
+{
+  "description": "Desklet to display real-time exchange rates for selected currencies with customizable appearance.",
+  "uuid": "currencyconverter@mysteriza",
+  "name": "Currency Converter",
+  "prevent-decorations": true,
+  "max-instances": 5,
+  "version": 2.1,
+  "author": "mysteriza",
+  "last-edited": 1735689600
+}

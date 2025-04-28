@@ -1,0 +1,125 @@
+{
+  "head0": {
+    "type": "header",
+    "description": "Settings for usdidr@mysteriza"
+  },
+  "head1": {
+    "type": "header",
+    "description": "API Settings"
+  },
+  "apiKey": {
+    "type": "entry",
+    "default": "",
+    "description": "ExchangeRate-API Key",
+    "tooltip": "Enter your API Key from https://www.exchangerate-api.com"
+  },
+  "head2": {
+    "type": "header",
+    "description": "Currency Settings"
+  },
+  "baseCurrency": {
+    "type": "combobox",
+    "default": "USD",
+    "description": "Base Currency",
+    "tooltip": "Select the base currency for conversion.",
+    "options": {
+      "USD": "USD",
+      "EUR": "EUR",
+      "JPY": "JPY",
+      "GBP": "GBP",
+      "AUD": "AUD",
+      "CAD": "CAD",
+      "CHF": "CHF",
+      "CNY": "CNY"
+    }
+  },
+  "targetCurrency": {
+    "type": "combobox",
+    "default": "IDR",
+    "description": "Target Currency",
+    "tooltip": "Select the target currency for conversion.",
+    "options": {
+      "IDR": "IDR",
+      "USD": "USD",
+      "EUR": "EUR",
+      "JPY": "JPY",
+      "GBP": "GBP",
+      "AUD": "AUD",
+      "CAD": "CAD",
+      "CHF": "CHF",
+      "CNY": "CNY"
+    }
+  },
+  "head3": {
+    "type": "header",
+    "description": "Appearance Settings"
+  },
+  "width": {
+    "type": "spinbutton",
+    "default": 200,
+    "min": 100,
+    "max": 400,
+    "units": "pixels",
+    "step": 5,
+    "description": "Desklet Width",
+    "tooltip": "Set the width of the desklet in pixels."
+  },
+  "height": {
+    "type": "spinbutton",
+    "default": 120,
+    "min": 80,
+    "max": 300,
+    "units": "pixels",
+    "step": 5,
+    "description": "Desklet Height",
+    "tooltip": "Set the height of the desklet in pixels."
+  },
+  "priceFontSize": {
+    "type": "spinbutton",
+    "default": 20,
+    "min": 14,
+    "max": 40,
+    "units": "pixels",
+    "step": 1,
+    "description": "Price Font Size",
+    "tooltip": "Set the font size of the exchange rate price in pixels."
+  },
+  "bgColor": {
+    "type": "colorchooser",
+    "default": "#303030",
+    "description": "Background Color",
+    "tooltip": "Choose the background color for the desklet."
+  },
+  "bgBorderRadius": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 0,
+    "max": 50,
+    "units": "pixels",
+    "step": 1,
+    "description": "Border Radius",
+    "tooltip": "Set the border radius of the background in pixels."
+  },
+  "transparency": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "units": "percent",
+    "step": 5,
+    "description": "Transparency",
+    "tooltip": "Set the transparency of the desklet background (0-100%)."
+  },
+  "priceTextColor": {
+    "type": "colorchooser",
+    "default": "#f9a7b5",
+    "description": "Price Text Color",
+    "tooltip": "Choose the color for the exchange rate price text."
+  },
+  "headerTextColor": {
+    "type": "colorchooser",
+    "default": "#73c4ff",
+    "description": "Header Text Color",
+    "tooltip": "Choose the color for the header and subheader text."
+  }
+}
